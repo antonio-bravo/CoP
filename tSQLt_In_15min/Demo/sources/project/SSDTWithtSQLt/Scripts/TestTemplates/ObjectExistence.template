@@ -1,0 +1,19 @@
+﻿CREATE PROCEDURE [TestBasic].[___TESTNAME___]
+AS
+/*
+<documentation>
+  <author>___CREATOR___</author>
+  <summary>Test if the ___OBJECTTYPE___ ___SCHEMA___.___NAME___ exists</summary>
+  <returns>nothing</returns>
+</documentation>
+
+Changes:
+Date        Who                     Notes
+----------  ---                     --------------------------------------------------------------
+___DATE___  ___CREATOR___           Creation
+*/
+    SET NOCOUNT ON;
+
+    ----- ASSERT -------------------------------------------------
+    EXEC tSQLt.AssertObjectExists @ObjectName = N'___SCHEMA___.___NAME___';
+END;

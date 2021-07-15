@@ -1,0 +1,23 @@
+﻿<testsuites>
+  <testsuite id="1" name="TestBasic" tests="4" errors="0" failures="1" timestamp="2021-07-14T18:43:16" time="0.217" hostname="d4468d34bfe4" package="tSQLt">
+    <properties />
+    <testcase classname="TestBasic" name="test If procedure dbo.Vessel_Create has the correct parameters" time="0.110" />
+    <testcase classname="TestBasic" name="test If table dbo.Operator exists" time="0.004" />
+    <testcase classname="TestBasic" name="test If table dbo.Vessel exists" time="0.003" />
+    <testcase classname="TestBasic" name="test If table dbo.Vessel has the correct columns" time="0.067">
+      <failure message="Unexpected/missing resultset rows!&#xD;&#xA;|_m_|ColumnName|DataType|LengthSize|Precision|&#xD;&#xA;+---+----------+--------+----------+---------+&#xD;&#xA;|&lt;  |VesselName|varchar |30        |0        |&#xD;&#xA;|=  |OperatorID|int     |4         |10       |&#xD;&#xA;|=  |Plug      |int     |4         |10       |&#xD;&#xA;|=  |TEU       |int     |4         |10       |&#xD;&#xA;|=  |VesselCode|char    |3         |0        |&#xD;&#xA;|=  |VesselID  |int     |4         |10       |&#xD;&#xA;|&gt;  |VesselName|varchar |100       |0        |" type="tSQLt.Fail" />
+    </testcase>
+    <system-out />
+    <system-err />
+  </testsuite>
+  <testsuite id="2" name="TestUnitTesting" tests="3" errors="0" failures="1" timestamp="2021-07-14T18:43:17" time="0.247" hostname="d4468d34bfe4" package="tSQLt">
+    <properties />
+    <testcase classname="TestUnitTesting" name="test Procedure Vessel_Create - Create Vessel" time="0.037" />
+    <testcase classname="TestUnitTesting" name="test Procedure Vessel_Create - Create Vessel without VesselCode should return error Expect success" time="0.043" />
+    <testcase classname="TestUnitTesting" name="test Vessel - Get all Vessels Expect success" time="0.140">
+      <failure message="Unexpected/missing resultset rows!&#xD;&#xA;|_m_|VesselID|VesselCode|VesselName|TEU |Plug|OperatorID|OperatorCode|&#xD;&#xA;+---+--------+----------+----------+----+----+----------+------------+&#xD;&#xA;|&lt;  |1       |$$$       |De Kai    |5000|100 |!NULL!    |!NULL!      |&#xD;&#xA;|=  |2       |000       |Kid Joe   |1000|50  |!NULL!    |!NULL!      |" type="tSQLt.Fail" />
+    </testcase>
+    <system-out />
+    <system-err />
+  </testsuite>
+</testsuites>

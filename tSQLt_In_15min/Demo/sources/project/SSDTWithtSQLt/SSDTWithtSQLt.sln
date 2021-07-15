@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D805F600-7742-4C83-BE02-B163474AF75C}") = "SSDTWithtSQLt-Data", "SSDTWithtSQLt-Data\SSDTWithtSQLt-Data.sqlproj", "{B6FAE1EB-BFC2-4C2A-8F25-A43D3C88CA3A}"
+EndProject
+Project("{D805F600-7742-4C83-BE02-B163474AF75C}") = "SSDTWithtSQLt-Tests", "SSDTWithtSQLt-Tests\SSDTWithtSQLt-Tests.sqlproj", "{77B7C919-215D-49E7-8574-F341D218BDC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6FAE1EB-BFC2-4C2A-8F25-A43D3C88CA3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6FAE1EB-BFC2-4C2A-8F25-A43D3C88CA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6FAE1EB-BFC2-4C2A-8F25-A43D3C88CA3A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B6FAE1EB-BFC2-4C2A-8F25-A43D3C88CA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6FAE1EB-BFC2-4C2A-8F25-A43D3C88CA3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6FAE1EB-BFC2-4C2A-8F25-A43D3C88CA3A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{77B7C919-215D-49E7-8574-F341D218BDC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B7C919-215D-49E7-8574-F341D218BDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B7C919-215D-49E7-8574-F341D218BDC1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{77B7C919-215D-49E7-8574-F341D218BDC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B7C919-215D-49E7-8574-F341D218BDC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B7C919-215D-49E7-8574-F341D218BDC1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7A3663D-9B32-4B1D-8AA4-568B37C00141}
+	EndGlobalSection
+EndGlobal
