@@ -69,6 +69,7 @@
     <Folder Include="Security" />
     <Folder Include="Assemblies" />
     <Folder Include="Stored Procedures\" />
+    <Folder Include="TestBasic\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tSQLt\Functions\F_Num.sql" />
@@ -234,6 +235,10 @@
     <Build Include="tSQLt\Stored Procedures\Private_SkipTestAnnotationHelper.sql" />
     <Build Include="tSQLt\Stored Procedures\RemoveAssemblyKey.sql" />
     <Build Include="tSQLt\Stored Procedures\SetSummaryError.sql" />
+    <Build Include="TestBasic\Stored Procedures\test If procedure dbo.Vessel_Create has the correct parameters.sql" />
+    <Build Include="TestBasic\Stored Procedures\test If table dbo.Operator exists.sql" />
+    <Build Include="TestBasic\Stored Procedures\test If table dbo.Vessel exists.sql" />
+    <Build Include="TestBasic\Stored Procedures\test If table dbo.Vessel has the correct columns.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assemblies\tSQLtCLR.dll" />

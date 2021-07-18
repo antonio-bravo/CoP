@@ -1,4 +1,8 @@
-#Change to path C:\Mio\Demo\tSQLt_In_15min\Demo\sources\project\SSDTWithtSQLt\Script
+#Change to path  C:\Mio\Demo\tSQLt_In_15min\Demo\sources\project\SSDTWithtSQLt\Scripts
+
+Import-Module PSFramework
+Import-Module PSModuleDevelopment
+Import-Module dbatools
 
 $cred = Get-Credential
 .\New-tSQLtBasicTest.ps1 -SqlInstance localhost -Database SecuritySuiteServer_Baseline -OutputPath c:\kk\tsqlt\TestBasic -SqlCredential $cred
