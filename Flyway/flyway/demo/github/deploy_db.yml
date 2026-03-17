@@ -1,0 +1,55 @@
+name: DB Deployment Workflow
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Allows manual execution
+
+env:
+  FLYWAY_DOCKER_IMAGE: flyway/flyway:latest
+  MIGRATION_PATH: ./sql/flyway/celtrak_data/migrations
+  JOBS_PATH: ./sql/flyway/msdb
+
+jobs:
+  # Initial job for approval (Requires setting up an environment called 'staging' on GitHub)
+  staging_migrate:
+    name: STAGING Migrate
+    runs-on: ubuntu-latest
+    environment: staging # Here is where GitHub will pause for manual approval
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Flyway Migration
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}${{ env.MIGRATION_PATH }}:/flyway/sql \
+            -e FLYWAY_URL="jdbc:sqlserver://<StagingServer>:1433;databaseName=<database>;trustServerCertificate=true" \
+            -e FLYWAY_BASELINE_ON_MIGRATE=true \
+            -e FLYWAY_USER="${{ secrets.DB_USER_STAGING }}" \
+            -e FLYWAY_PASSWORD="${{ secrets.DB_PASSWORD_STAGING }}" \
+            ${{ env.FLYWAY_DOCKER_IMAGE }} migrate
+
+  # Matrix-type jobs for SQL Server jobs
+  staging_jobs_deploy:
+    name: STAGING JOBS Deploy
+    needs: staging_migrate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        server: [Server1_in_HADR, Server2_in_HADR]
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy Jobs to ${{ matrix.server }}
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}${{ env.JOBS_PATH }}:/flyway/sql \
+            -e FLYWAY_URL="jdbc:sqlserver://${{ matrix.server }}:1433;databaseName=msdb;trustServerCertificate=true" \
+            -e FLYWAY_BASELINE_ON_MIGRATE=true \
+            -e FLYWAY_USER="${{ secrets.DB_USER_STAGING }}" \
+            -e FLYWAY_PASSWORD="${{ secrets.DB_PASSWORD_STAGING }}" \
+            ${{ env.FLYWAY_DOCKER_IMAGE }} migrate

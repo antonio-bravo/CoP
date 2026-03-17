@@ -1,0 +1,67 @@
+pipeline {
+    agent any
+    environment {
+        FLYWAY_DOCKER_IMAGE = 'flyway/flyway:latest'
+        MIGRATION_PATH = '/sql/flyway/celtrak_data/migrations'
+        JOBS_PATH = '/sql/flyway/msdb'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+ 
+
+        stage('STAGING approval') {
+            steps {
+                timeout(time: 90, unit: "DAYS") {
+                    retry(999) {
+                        input message: 'Do you want to approve the deployment?', ok: 'Yes'
+                    }
+                }
+                echo "Initiating deployment"
+            }
+        }
+        
+        stage('STAGING migrate') {
+            
+            environment {
+                FLYWAY_URL = 'jdbc:sqlserver://<StagingServer>:1433;databaseName=<database>;trustServerCertificate=true'
+                DB_CREDS = credentials('db-deployment-credentials-STAGING')
+            }
+            steps {
+                        sh 'docker run --rm -v \${WORKSPACE}${MIGRATION_PATH}:/flyway/sql -e FLYWAY_URL=${FLYWAY_URL} -e FLYWAY_BASELINE_ON_MIGRATE=true -e FLYWAY_USER=\$DB_CREDS_USR -e FLYWAY_PASSWORD=\$DB_CREDS_PSW ${FLYWAY_DOCKER_IMAGE} migrate'
+            }
+        }
+
+        stage('STAGING JOBS Deploy') {
+            matrix {
+                axes {
+                    axis {
+                        name 'SERVER'
+                        values 'Server1_in_HADR', 'Server2_in_HADR'
+                    }
+                }
+                environment {
+                    FLYWAY_URL = "jdbc:sqlserver://${SERVER}:1433;databaseName=msdb;trustServerCertificate=true"
+                    DB_CREDS = credentials('db-deployment-credentials-STAGING')
+                }
+                stages {
+                    stage("Deploy") {
+                        steps {
+                            sh 'docker run --rm -v ${WORKSPACE}${JOBS_PATH}:/flyway/sql -e FLYWAY_URL=${FLYWAY_URL} -e FLYWAY_BASELINE_ON_MIGRATE=true -e FLYWAY_USER=$DB_CREDS_USR -e FLYWAY_PASSWORD=$DB_CREDS_PSW ${FLYWAY_DOCKER_IMAGE} migrate'
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
