@@ -1,0 +1,1 @@
+ALTER TABLE dbo.products ADD stock INT DEFAULT 0;

@@ -1,0 +1,6 @@
+# Intiatize Flyway on DB is it does not exists
+flyway.baselineOnMigrate=true
+
+flyway.url=jdbc:sqlserver://<ServerName>.AMS-IRE-TT.COM:1433;databaseName=<database_name>;integratedSecurity=true;trustServerCertificate=true
+
+flyway.locations=filesystem:./migrations,./sprint-*,filesystem:./migrations-undo

@@ -1,0 +1,1 @@
+ALTER TABLE dbo.products DROP COLUMN IF EXISTS stock;
