@@ -59,7 +59,8 @@ export $(xargs < .env) && flyway migrate
 Get-Content .env | Foreach-Object { $name, $value = $_.split('='); [System.Environment]::SetEnvironmentVariable($name, $value) }
 flyway migrate
 ```
-```cmd
+### Load for Windows cmd (Batch):
+```bash
 for /f "tokens=*" %i in (.env) do set %i
 ```
 
