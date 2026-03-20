@@ -56,7 +56,7 @@ export $(xargs < .env) && flyway migrate
 
 ### Load for Windows PowerShell:
 ```powershell
-Get-Content .env | Foreach-Object { $name, $value = $_.split('='); [System.Environment]::SetEnvironmentVariable($name, $value) }
+Get-Content .env | Foreach-Object { $name, $value = $_.split('=',2); [System.Environment]::SetEnvironmentVariable($name, $value) }
 flyway migrate
 ```
 ### Load for Windows cmd (Batch):
